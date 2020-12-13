@@ -36,9 +36,7 @@ export class Technology extends Component {
   getTech() {
     techObjs.map((elem) => {
       if (elem.name === this.state.tag.name.toLowerCase()) {
-        this.setState({
-          tech: elem,
-        });
+        return this.setState({ tech: elem });
       }
     });
   }
@@ -60,7 +58,12 @@ export class Technology extends Component {
     const githubLink = this.state.githubLink;
     const tag = this.state.tag;
     axios
-      .post(`${process.env.REACT_APP_API_URL}/job/job-detail/technology`, {job, user, githubLink, tag})
+      .post(`${process.env.REACT_APP_API_URL}/job/job-detail/technology`, {
+        job,
+        user,
+        githubLink,
+        tag,
+      })
       .then((response) => {
         console.log(response);
         this.props.history.push(`/job-detail-saved/${this.state.job._id}`);
@@ -69,7 +72,6 @@ export class Technology extends Component {
         console.log(err);
       });
   };
-  touppe;
 
   render() {
     return (
@@ -114,7 +116,7 @@ export class Technology extends Component {
         </p>
 
         <Button
-          style={{ marginBottom: "3vw", marginTop: '1vw' }}
+          style={{ marginBottom: "3vw", marginTop: "1vw" }}
           className="button-options"
           onClick={this.displayCourses}
         >
@@ -138,14 +140,20 @@ export class Technology extends Component {
                     overlay="white-slight"
                   />
                   <MDBCardBody>
-                    <MDBCardTitle style={{ textAlign: "center" }} tag="h5">{course.title}</MDBCardTitle>
+                    <MDBCardTitle style={{ textAlign: "center" }} tag="h5">
+                      {course.title}
+                    </MDBCardTitle>
 
                     <a
                       rel="noopener noreferrer"
                       target="_blank"
                       href={course.link}
                     >
-                      <MDBBtn style={{ display: "flex", justifyContent: "center" }} color="primary" size="md">
+                      <MDBBtn
+                        style={{ display: "flex", justifyContent: "center" }}
+                        color="primary"
+                        size="md"
+                      >
                         Ask for more
                       </MDBBtn>{" "}
                     </a>

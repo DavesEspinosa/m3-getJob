@@ -20,7 +20,3 @@ router.post("/test", async (req, res, next) => {
 
 module.exports = router;
 
-for (let i = 0; i < array.length; i++) {
-  const element = array[i];
-  
-}

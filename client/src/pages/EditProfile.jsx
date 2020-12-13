@@ -21,33 +21,36 @@ export class EditProfile extends Component {
     };
   }
 
- componentDidMount () {
-
+  componentDidMount() {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/user/profile`, {withCredentials:true})
-      .then((response) => {
-       
-        const {  email,
-          firstname,
-          lastname,
-          city,
-          country,
-          phone,
-          linkedin,
-          image } = response.data;
-        this.setState({  email,
-          firstname,
-          lastname,
-          city,
-          country,
-          phone,
-          linkedin,
-          image, 
-        user:response.data });
+      .get(`${process.env.REACT_APP_API_URL}/user/profile`, {
+        withCredentials: true,
       })
-      .catch((err) => console.log("Error EditUserPage.js, line 15"));   
-    }
- 
+      .then((response) => {
+        const {
+          email,
+          firstname,
+          lastname,
+          city,
+          country,
+          phone,
+          linkedin,
+          image,
+        } = response.data;
+        this.setState({
+          email,
+          firstname,
+          lastname,
+          city,
+          country,
+          phone,
+          linkedin,
+          image,
+          user: response.data,
+        });
+      })
+      .catch((err) => console.log("Error EditUserPage.js, line 15"));
+  }
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -135,13 +138,13 @@ export class EditProfile extends Component {
       country,
       phone,
       linkedin,
-      
+      image,
     } = this.state;
     return (
       <div className="js-content section cover">
         <MDBContainer>
           <MDBRow>
-            <MDBCol >
+            <MDBCol>
               <form onSubmit={this.handleFormSubmit}>
                 <p className="h4 text-center mb-4">Edit your profile</p>
                 <label
@@ -240,8 +243,11 @@ export class EditProfile extends Component {
                 >
                   Image
                 </label>
+                <span>
+                  <img src={image} alt='' style={{width:'100px'}}></img>
+                </span>
                 <MDBInput
-                  type="file"
+                  type="file" 
                   onChange={this.fileOnchange}
                   id="defaultFormRegisterEmailEx"
                   className="grey-text"

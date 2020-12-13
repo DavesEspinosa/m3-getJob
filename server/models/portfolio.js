@@ -3,12 +3,14 @@ const Schema = mongoose.Schema;
 
 const portfolioSchema = new Schema(
   {
+    owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     technologies: [
       {
         name: { type: String },
         url: { type: String },
       },
     ],
+
   },
   {
     timestamps: {
